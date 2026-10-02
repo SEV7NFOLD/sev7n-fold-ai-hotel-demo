@@ -1,0 +1,44 @@
+/* The scene belongs only to the immersive full-screen call experience. */
+.app-shell{background:var(--bg)}
+.call-experience{position:fixed;inset:0;z-index:90;isolation:isolate;min-height:100vh;min-height:100dvh;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);color:var(--ink)}
+.call-experience .spline-screen{position:absolute!important;inset:0!important;z-index:0!important;display:block;width:100%!important;height:100%!important;overflow:hidden;pointer-events:none;opacity:1}
+.call-experience .spline-screen spline-viewer{display:block!important;width:100%!important;height:100%!important;background:transparent!important;pointer-events:none}
+.call-vignette{position:absolute;z-index:1;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,transparent 10%,color-mix(in srgb,var(--bg),transparent 35%) 72%,var(--bg) 130%)}
+.call-topbar,.call-center,.call-dock{position:relative;z-index:2}
+.call-topbar{height:62px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,42px);border-bottom:1px solid color-mix(in srgb,var(--line),transparent 50%);background:color-mix(in srgb,var(--surface),transparent 33%);backdrop-filter:blur(16px)}
+.call-topbar .brand{padding:0}.call-topbar .theme-button{background:color-mix(in srgb,var(--surface),transparent 28%)}
+.call-back{display:flex;align-items:center;gap:7px;border:0;background:transparent;color:var(--body);font-size:10px;cursor:pointer}
+.call-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 18px 10px;min-height:0}
+.call-presence{display:flex;align-items:center;gap:7px;color:var(--accent-strong);font-size:8px;letter-spacing:1.2px;margin-bottom:13px}
+.call-presence i{display:block;width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:presence 1.8s ease-in-out infinite}
+.call-center h1{font:clamp(32px,7vw,52px)/1.1 var(--font-editorial);letter-spacing:-1px;margin:0;color:var(--ink);text-shadow:0 2px 20px color-mix(in srgb,var(--bg),transparent 25%)}
+.call-center h1 span{color:var(--accent)}.call-subtitle{margin:9px 0 0;color:var(--body);font-size:11px}
+.call-orbit{position:absolute;width:min(64vw,430px);aspect-ratio:1;border:1px solid color-mix(in srgb,var(--accent),transparent 83%);border-radius:50%;pointer-events:none;animation:slowspin 32s linear infinite}
+.call-orbit:before,.call-orbit:after{content:"";position:absolute;inset:12%;border:1px solid color-mix(in srgb,var(--sage),transparent 45%);border-radius:50%;transform:rotateX(68deg) rotate(35deg)}
+.call-orbit:after{transform:rotateX(68deg) rotate(-50deg)}.call-orbit i{position:absolute;width:5px;height:5px;background:var(--accent);border-radius:50%;box-shadow:0 0 12px var(--accent)}.call-orbit i:first-child{top:12%;left:21%}.call-orbit i:nth-child(2){right:8%;top:57%}.call-orbit i:nth-child(3){bottom:15%;left:30%}
+.call-transcript{width:min(100%,410px);margin-top:27px;padding:13px 15px;text-align:left;border:1px solid color-mix(in srgb,var(--line),transparent 12%);border-radius:14px;background:color-mix(in srgb,var(--surface),transparent 23%);backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.transcript-label{font-size:7px;letter-spacing:1.2px;color:var(--muted)}.call-transcript p{margin:11px 0 0;font-size:9px;line-height:1.5;color:var(--body)}.call-transcript p b{display:block;color:var(--accent-strong);font-size:8px;letter-spacing:.5px;margin-bottom:2px}.call-transcript p span{display:block}
+.call-dock{width:min(calc(100% - 28px),460px);margin:0 auto max(20px,env(safe-area-inset-bottom));padding:12px 16px 10px;border:1px solid color-mix(in srgb,var(--line),transparent 12%);border-radius:17px;background:color-mix(in srgb,var(--surface),transparent 20%);backdrop-filter:blur(22px);box-shadow:var(--shadow);text-align:center}
+.dock-caption{display:flex;justify-content:space-between;font-size:7px;letter-spacing:.8px;color:var(--muted)}.call-dock .wave{height:35px;margin:6px auto 9px}.call-dock .wave i{animation-duration:.65s}.call-thinking .call-dock .wave i{animation-duration:1.4s}.call-speaking .call-dock .wave i{animation-duration:.4s}
+.dock-controls{display:flex;align-items:center;justify-content:center;gap:18px}.dock-control{width:39px;height:39px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--body);cursor:pointer}.dock-control.toggled{background:var(--peach);color:var(--accent-strong)}.hangup-button{height:41px;display:flex;align-items:center;gap:8px;border:0;border-radius:24px;padding:0 17px;background:#ad625a;color:white;font-size:10px;cursor:pointer}.call-dock>p{font-size:7px;color:var(--muted);margin:9px 0 0}
+@keyframes presence{50%{opacity:.45;transform:scale(.8)}}
+@media(max-width:700px){.call-topbar{height:56px;padding:0 12px}.call-topbar .brand small{font-size:6px}.call-back span{display:none}.call-center{padding:12px 14px}.call-orbit{width:min(87vw,390px)}.call-transcript{margin-top:22px}.call-dock{margin-bottom:max(13px,env(safe-area-inset-bottom));padding:11px 13px 9px}}
+
+/* ChatGPT-style live session: scene first, compact controls only. */
+.call-experience{background:#090a0d;color:#fff}
+.call-experience .spline-screen{opacity:1}
+.call-experience .spline-screen:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,#5c31553b 0%,#25172d22 24%,transparent 52%)}
+.call-experience .spline-screen spline-viewer{position:absolute;inset:0;z-index:1}
+.call-vignette{background:linear-gradient(180deg,#090a0d66 0%,transparent 23%,transparent 62%,#090a0dc9 100%)}
+.call-topbar{height:58px;border:0;background:transparent;backdrop-filter:none}
+.call-topbar .call-back,.call-topbar .theme-button{color:#fff;background:#10111572;border:1px solid #ffffff24;backdrop-filter:blur(12px)}
+.call-title{font-size:8px;letter-spacing:1.6px;color:#ffffffc9}.call-title i{color:#c8a978;font-style:normal;padding:0 4px}
+.call-center{position:absolute;inset:auto 0 164px;height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 14px;pointer-events:none}
+.call-presence{margin:0;border:1px solid #ffffff24;border-radius:22px;padding:8px 12px;background:#10111582;backdrop-filter:blur(12px);color:#fff;font-size:8px;letter-spacing:1.3px}
+.call-live-caption{max-width:min(88vw,420px);margin:9px 0 0;padding:7px 12px;border:1px solid #ffffff16;border-radius:18px;background:#10111570;color:#ffffffc9;font-size:10px;line-height:1.4;backdrop-filter:blur(12px)}
+.call-error-message{max-width:min(88vw,420px);margin:8px 0 0;color:#ffd4d4;font-size:9px;line-height:1.45;text-shadow:0 1px 10px #000}
+.call-experience.call-error .call-presence i{background:#e87575;box-shadow:0 0 12px #e87575}
+.call-dock{position:absolute;left:50%;bottom:max(23px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 28px),280px);margin:0;padding:13px 17px 11px;border:1px solid #ffffff26;border-radius:25px;background:#111217a8;backdrop-filter:blur(20px);box-shadow:0 12px 45px #0003}
+.call-dock .wave{height:30px;margin:0 auto 8px}.call-dock .wave i{background:linear-gradient(#f2d5dc,#c3dbca);opacity:.9}
+.dock-controls{gap:17px}.dock-control{width:42px;height:42px;border-color:#ffffff2a;background:#ffffff12;color:#fff}.dock-control.toggled{background:#f2c4c866;color:#fff}.hangup-button{width:50px;height:50px;justify-content:center;padding:0;border-radius:50%;background:#dc5656;color:#fff;box-shadow:0 0 22px #dc56564a}.hangup-button span{display:none}.demo-label{display:block;text-align:center;margin-top:9px;color:#ffffff89;font-size:6px;letter-spacing:1.5px}
+@media(max-width:700px){.call-topbar{height:52px;padding:0 13px}.call-center{bottom:151px}.call-dock{width:254px;bottom:max(19px,env(safe-area-inset-bottom));padding:11px 15px 10px}}

@@ -1,0 +1,6 @@
+export type AIAgentState = 'IDLE' | 'LISTENING' | 'THINKING' | 'SPEAKING' | 'EXECUTING' | 'HANDING_OFF';
+export interface ToolAction { id: string; timestamp: string; action: string; status: 'PENDING' | 'COMPLETED' | 'FAILED'; details?: string }
+export interface Message { id: string; sender: 'CALLER' | 'AVA' | 'SYSTEM'; text: string; timestamp: string; toolActions?: ToolAction[] }
+export interface Call { id: string; callerName: string; callerPhone: string; timestamp: string; duration: string; intent: string; status: 'RESOLVED' | 'HANDED_OFF' | 'IN_PROGRESS'; transcript: Message[]; aiActions: string[]; humanEscalated: boolean; notes?: string }
+export interface Reservation { id: string; guestName: string; guestEmail: string; roomType: 'Deluxe King' | 'Executive Room' | 'Aurelia Suite'; checkIn: string; checkOut: string; guestsCount: number; totalAmountNaira: number; status: 'Confirmed' | 'Awaiting confirmation' | 'Cancelled'; specialRequests?: string; relatedCallId?: string; aiActionsApplied: string[] }
+export interface HotelKnowledgeItem { id: string; title: string; category: 'Rooms' | 'Amenities' | 'Dining' | 'Policies' | 'Location' | 'Transportation' | 'FAQs'; content: string; availableIn?: string[]; lastUpdated: string }
