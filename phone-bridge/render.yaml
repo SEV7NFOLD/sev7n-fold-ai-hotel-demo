@@ -1,0 +1,61 @@
+# Render Blueprint for the Ava Phone Bridge.
+#
+# Deploy: Render dashboard -> New -> Blueprint -> point at this repository.
+# Render reads this file, builds the service and asks you for the secret values marked
+# `sync: false` (they are never stored in the repository).
+#
+# The existing Next.js browser app stays on Vercel. This file only describes the bridge.
+#
+# IMPORTANT: this service must NOT be deployed as a static site or a serverless function.
+# Phone calls require a long-lived process holding two WebSockets per call.
+
+services:
+  - type: web
+    name: ava-phone-bridge
+    runtime: node
+    plan: starter
+    region: frankfurt
+    branch: main
+    rootDir: phone-bridge
+    buildCommand: npm ci --no-audit --no-fund && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # --- secrets: set these in the Render dashboard, never in the repo ---
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: AVA_MEDIA_TOKEN
+        sync: false
+
+      # --- non-secret configuration ---
+      - key: NODE_VERSION
+        value: "22"
+      - key: GEMINI_LIVE_MODEL
+        value: gemini-3.8-live
+      - key: GEMINI_VOICE
+        value: Kore
+      - key: GEMINI_LANGUAGE_CODE
+        value: en-US
+      - key: AVA_BUSINESS_NAME
+        value: SEV7N FOLD
+      - key: AVA_MAX_CONCURRENT_CALLS
+        value: "20"
+      - key: AVA_MAX_CALL_SECONDS
+        value: "1800"
+      - key: AVA_TRUST_PROXY
+        value: "true"
+      - key: AVA_BRIDGE_LOG_LEVEL
+        value: info
+      - key: AVA_BRIDGE_LOG_FORMAT
+        value: json
+      # Never enable PII logging in production.
+      - key: AVA_BRIDGE_LOG_PII
+        value: "false"
+      # PUBLIC_BASE_URL must be set to the service's own https URL after first deploy,
+      # e.g. https://ava-phone-bridge.onrender.com — it is used to build the wss://
+      # media-stream URL the phone provider connects back to.
+      - key: PUBLIC_BASE_URL
+        sync: false

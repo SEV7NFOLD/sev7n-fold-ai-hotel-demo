@@ -1,0 +1,24 @@
+# Ava Phone Bridge — dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local environment files. Never commit these.
+# Note: the bridge uses `env.example` (not `.env.example`) precisely so the root
+# `.gitignore` rule `.env*` cannot accidentally ignore it.
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
