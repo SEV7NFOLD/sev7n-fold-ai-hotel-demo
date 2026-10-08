@@ -81,8 +81,7 @@ function SettingsScreen({ dark, onTheme }: { dark: boolean; onTheme: () => void 
 function ScreenTitle({ eyebrow, title, sub }: { eyebrow: string; title: string; sub: string }) { return <div className="screen-title"><span>{eyebrow}</span><h1>{title}</h1><p>{sub}</p></div>; }
 
 export default function Page() {
-  const [screen,setScreen]=useState<Screen>('overview'); const [dark,setDark]=useState(false); const [intro,setIntro]=useState(true); const [menu,setMenu]=useState(false); const [callOpen,setCallOpen]=useState(false);
-  useEffect(()=>{const timer=window.setTimeout(()=>setIntro(false),2800);return()=>window.clearTimeout(timer)},[]);
+  const [screen,setScreen]=useState<Screen>('overview'); const [dark,setDark]=useState(false); const [intro,setIntro]=useState(false); const [menu,setMenu]=useState(false); const [callOpen,setCallOpen]=useState(true);
   useEffect(()=>{document.documentElement.dataset.theme=dark?'dark':'light'},[dark]);
   const go=(target:Screen)=>{setMenu(false);if(target==='calls'){setCallOpen(true);return}setScreen(target)};
   if(callOpen) return <CallsScreen onEnd={()=>setCallOpen(false)} dark={dark} onTheme={()=>setDark(!dark)}/>;
